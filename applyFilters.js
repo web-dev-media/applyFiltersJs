@@ -1,8 +1,25 @@
+/**
+ *
+ *
+ */
+'use strict';
 
 module.exports = {
     applyFilters: {
+
+        // container for all registered filter
         filter  : [],
 
+        /**
+         * Consumer register a function that use a filter/hook 'this.doFilter()' to change something in his project
+         *
+         * @param {string} filterName
+         * @param {string} hookName
+         * @param {function} callback
+         * @param {number} priority
+         *
+         * @return void
+         */
         addFilter: function(filterName, hookName, callback, priority = null) {
             if ( 'string' !== typeof filterName || '' === filterName ) {
                 return false;
@@ -31,15 +48,14 @@ module.exports = {
             this.filter[filterName][priority][hookName] = callback;
         },
 
-        getFilter: function(filterName = ''){
-            if(this.filter[filterName] !== undefined ){
-                return this.filter[filterName];
-            }else{
-                return this.filter;
-            }
-        },
-
-        doFilter: async function(filterName, filterObj, arguments = null) {
+        /**
+         * Register a filter/hook so that consumer use to register a 'this.addFilter()' function
+         *
+         * @param {string} filterName
+         * @param filterObj
+         * @param args
+         */
+        doFilter: async function(filterName, filterObj, args = null) {
             let self = this;
 
             if ( 'string' !== typeof filterName || '' === filterName ) {
@@ -49,7 +65,7 @@ module.exports = {
             let filter = this.filter[ filterName ] !== undefined ? this.filter[ filterName ] : null;
 
             if ( filter ) {
-               let solvedFilter = self.asyncForEach( filter, filterObj, arguments );
+               let solvedFilter = self.asyncForEach( filter, filterObj, args );
 
                 return Promise.all(solvedFilter).then(values => {
                     return values[values.length-1];
@@ -61,7 +77,11 @@ module.exports = {
             }
         },
 
-        asyncForEach: function (callbackFunctions, filterObj, arguments = null) {
+        /**
+         *
+         *
+         */
+        asyncForEach: function (callbackFunctions, filterObj, args = null) {
             let solvedFilter = [];
             let priorities = Object.keys( callbackFunctions );
 
@@ -89,6 +109,18 @@ module.exports = {
             }
 
             return solvedFilter;
-        }
+        },
+
+        /**
+         *
+         *
+         */
+        getFilter: function(filterName = ''){
+            if(this.filter[filterName] !== undefined ){
+                return this.filter[filterName];
+            }else{
+                return this.filter;
+            }
+        },
     }
 };
