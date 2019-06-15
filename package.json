@@ -1,0 +1,23 @@
+{
+  "name": "applyfilters",
+  "version": "1.0.0",
+  "description": "",
+  "main": "applyFilters.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-dev-media/applyFiltersJs.git"
+  },
+  "keywords": [
+    "hooks",
+    "filter"
+  ],
+  "author": "Web Dev Media UG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/web-dev-media/applyFiltersJs/issues"
+  },
+  "homepage": "https://github.com/web-dev-media/applyFiltersJs#readme"
+}
