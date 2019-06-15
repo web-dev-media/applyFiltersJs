@@ -1,7 +1,3 @@
-/**
- *
- *
- */
 'use strict';
 
 module.exports = {
@@ -11,7 +7,8 @@ module.exports = {
         filter  : [],
 
         /**
-         * Consumer register a function that use a filter/hook 'this.doFilter()' to change something in his project
+         * Consumer register a function that use a filter/hook 'this.doFilter()'
+         * for changing something in the progress
          *
          * @param {string} filterName
          * @param {string} hookName
@@ -20,7 +17,7 @@ module.exports = {
          *
          * @return void
          */
-        addFilter: function(filterName, hookName, callback, priority = null) {
+        addFilter: function(filterName, hookName, callback, priority = 0) {
             if ( 'string' !== typeof filterName || '' === filterName ) {
                 return false;
             }
@@ -49,7 +46,8 @@ module.exports = {
         },
 
         /**
-         * Register a filter/hook so that consumer use to register a 'this.addFilter()' function
+         * Register a filter/hook so that consumer use to register a 'this.addFilter()'
+         * function to register a callback function
          *
          * @param {string} filterName
          * @param filterObj
@@ -78,8 +76,13 @@ module.exports = {
         },
 
         /**
+         * Run over the registered callbackFunctions
          *
+         * @param {function} callbackFunctions
+         * @param filterObj
+         * @param args
          *
+         * @return promise|array
          */
         asyncForEach: function (callbackFunctions, filterObj, args = null) {
             let solvedFilter = [];
@@ -96,12 +99,12 @@ module.exports = {
                     if ( callbackFunctions[ priority ][ callbackFunction ] !== undefined ) {
                         solvedFilter.push( new Promise( ( resolve, reject ) => {
                                 let filter = callbackFunctions[ priority ][ callbackFunction ];
-                                filter( resolve, filterObj, arguments );
+                                filter( resolve, filterObj, args );
                             } )
                         );
                     } else {
                         solvedFilter.push( new Promise( ( resolve, reject ) => {
-                                resolve( filterObj, arguments );
+                                resolve( filterObj, args );
                             } )
                         );
                     }
@@ -112,8 +115,9 @@ module.exports = {
         },
 
         /**
+         * returns all registered filter
          *
-         *
+         * @param {string} filterName
          */
         getFilter: function(filterName = ''){
             if(this.filter[filterName] !== undefined ){
