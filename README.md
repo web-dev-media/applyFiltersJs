@@ -35,6 +35,8 @@ let sayHello = () => {
 	 * @param {string} filterName
 	 * @param filterObj
 	 * @param args
+	 * 
+	 * @return promise
 	 */
 	applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
 		alert(helloStr);
@@ -49,6 +51,8 @@ filter the helloStr from other place like a new file
  * @param {string} hookName
  * @param {function} callback
  * @param {number} priority
+ * 
+ * @return resolve 
  */
 applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, helloStr) => {
 	helloStr = 'Rene';
