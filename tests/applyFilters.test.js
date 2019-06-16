@@ -1,5 +1,21 @@
 const applyFilters = require('../applyFilters').applyFilters;
 
+
+applyFilters.addFilter('moreThenOneFilter', 'filterOne', (resolve, testObj) => {
+	testObj.awesome = 44;
+	resolve(testObj);
+}, 2);
+
+applyFilters.addFilter('moreThenOneFilter', 'filterTwo', (resolve, testObj) => {
+	testObj.unbelivebil = 66;
+	resolve(testObj);
+}, 1);
+
+applyFilters.addFilter('applyFiltersTest', 'addClassFilterResolved', (resolve, testObj) => {
+	testObj.awesome = 33;
+	resolve(testObj);
+}, 2);
+
 test('Test not used doFilter - emotyDoFilterTest', () => {
 	let testObj = 42;
 
@@ -40,6 +56,9 @@ test('Test getFilter all', () => {
 	expect(typeof allFilter.moreThenOneFilter).toBe('object');
 });
 
+/*
+ + Test getFilter with specific filtername
+ */
 test('Test getFilter with filterName', () => {
 	applyFilters.doFilter( 'moreThenOneFilter', {} ).then((testObj) => {});
 
@@ -47,21 +66,6 @@ test('Test getFilter with filterName', () => {
 
 	expect(allFilter.length).toBe(3);
 });
-
-applyFilters.addFilter('applyFiltersTest', 'addClassFilterResolved', (resolve, testObj) => {
-	testObj.awesome = 33;
-	resolve(testObj);
-}, 2);
-
-applyFilters.addFilter('moreThenOneFilter', 'filterOne', (resolve, testObj) => {
-	testObj.awesome = 44;
-	resolve(testObj);
-}, 2);
-
-applyFilters.addFilter('moreThenOneFilter', 'filterTwo', (resolve, testObj) => {
-	testObj.unbelivebil = 66;
-	resolve(testObj);
-}, 1);
 
 test('Test helloStr', () => {
 	let sayHello = () => {

@@ -1,10 +1,10 @@
 {
   "name": "applyfilters",
   "version": "1.0.2",
-  "description": "",
+  "description": "> a simple lightweight javascript module to implement hooks in your project.",
   "main": "applyFilters.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,10 @@
   "homepage": "https://github.com/web-dev-media/applyFiltersJs#readme",
   "devDependencies": {
     "jest": "^24.8.0"
-  }
+  },
+  "directories": {
+    "example": "example",
+    "test": "tests"
+  },
+  "dependencies": {}
 }
