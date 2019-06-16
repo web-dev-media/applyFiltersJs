@@ -15,7 +15,7 @@
     "filter"
   ],
   "author": "Web Dev Media UG",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/web-dev-media/applyFiltersJs/issues"
   },
