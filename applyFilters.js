@@ -1,8 +1,5 @@
-'use strict';
-
 module.exports = {
     applyFilters: {
-
         // container for all registered filter
         filter  : [],
 

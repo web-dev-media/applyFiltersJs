@@ -1,0 +1,20 @@
+{
+  "name": "applyfilters-examples",
+  "version": "1.0.0",
+  "description": "show how applyfilters will work",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "example",
+    "applyfilters",
+    "hook"
+  ],
+  "author": "Web Dev Media UG",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "^3.3.4",
+    "webpack": "^4.34.0"
+  }
+}
