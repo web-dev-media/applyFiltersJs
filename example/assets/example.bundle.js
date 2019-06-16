@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "../applyFilters.js":
-/*!**************************!*\
-  !*** ../applyFilters.js ***!
-  \**************************/
+/***/ "./node_modules/applyFilters/applyFilters.js":
+/*!***************************************************!*\
+  !*** ./node_modules/applyFilters/applyFilters.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -231,22 +231,25 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-const applyFilters = __webpack_require__(/*! ../../applyFilters */ "../applyFilters.js").applyFilters;
+const applyFilters = __webpack_require__(/*! applyFilters */ "./node_modules/applyFilters/applyFilters.js").applyFilters;
 
 let sayHello = () => {
 	let helloStr = 'John';
+	let span = document.querySelector('h2 span');
 
 	applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
-		console.log({helloStr:helloStr});
+		span.innerHTML = helloStr;
 	});
 };
 
 applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, str) => {
-	str = 'Rene';
+	str = str + ' and Rene';
 	resolve(str);
 }, 1);
 
-sayHello();
+document.addEventListener("DOMContentLoaded", function(event) {
+	sayHello();
+});
 
 
 /***/ }),

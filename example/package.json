@@ -14,7 +14,8 @@
   "author": "Web Dev Media UG",
   "license": "ISC",
   "devDependencies": {
-    "webpack-cli": "^3.3.4",
-    "webpack": "^4.34.0"
+    "applyfilters": "^1.0.1",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
   }
 }

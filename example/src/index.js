@@ -1,16 +1,19 @@
-const applyFilters = require('../../applyFilters').applyFilters;
+const applyFilters = require('applyFilters').applyFilters;
 
 let sayHello = () => {
 	let helloStr = 'John';
+	let span = document.querySelector('h2 span');
 
 	applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
-		console.log({helloStr:helloStr});
+		span.innerHTML = helloStr;
 	});
 };
 
 applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, str) => {
-	str = 'Rene';
+	str = str + ' and Rene';
 	resolve(str);
 }, 1);
 
-sayHello();
+document.addEventListener("DOMContentLoaded", function(event) {
+	sayHello();
+});
