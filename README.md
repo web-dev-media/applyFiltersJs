@@ -8,36 +8,53 @@ Implemnt promise callback hooks in your projects.
 Using npm:
 
 ```sh
-npm install --save-dev applyfilters
+npm install --save applyfilters
 ```
 
 ## Usage
-Define a dofilter
+Place a dofilter event
 
 ```js
-applyFilters.doFilter( 'myFilterPoint', {} ).then((filteredResult) => {});
+/*
+ * Place the doFilter() function this will handle
+ * the registred filter functions
+ *
+ * @param {string} filterName
+ * @param filterObj
+ * @param args
+ *
+ * @return promise
+  */
+applyFilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
 ```
 
-use a filter
+Add a filter function
 ```js
-applyFilters.addFilter('moreThenOneFilter', 'filterTwo', (resolve, filteredResult) => {
-	resolve(filteredResult);
+/* 
+ * Register a custom filter on 'beforeSayHello' and change the response.
+ * 
+ * Attention: the callback function in addFilter() 
+ * runs in a Promise so you have to resolve this!
+ * 
+ * @param {string} filterName
+ * @param {function} callback
+ * @param {number} priority
+ * 
+ * @return void 
+ */
+applyFilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
+    resolve(filteredResult);
 }, 1);
 ```
 
 ## Example
 
 ```js
+const applyFilters = require('applyFilters').applyFilters;
+
 let sayHello = () => {
 	let helloStr = '';
 
-	/*
-	 * @param {string} filterName
-	 * @param filterObj
-	 * @param args
-	 * 
-	 * @return promise
-	 */
 	applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
 		alert(helloStr);
 	});
@@ -46,14 +63,6 @@ let sayHello = () => {
 filter the helloStr from other place like a new file
 
 ```js
-/* 
- * @param {string} filterName
- * @param {string} hookName
- * @param {function} callback
- * @param {number} priority
- * 
- * @return resolve 
- */
 applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, helloStr) => {
 	helloStr = 'Rene';
 	resolve(helloStr);

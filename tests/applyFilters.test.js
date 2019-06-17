@@ -1,17 +1,22 @@
 const applyFilters = require('../applyFilters').applyFilters;
 
 
-applyFilters.addFilter('moreThenOneFilter', 'filterOne', (resolve, testObj) => {
+applyFilters.addFilter('moreThenOneFilter',(resolve, testObj) => {
 	testObj.awesome = 44;
 	resolve(testObj);
 }, 2);
 
-applyFilters.addFilter('moreThenOneFilter', 'filterTwo', (resolve, testObj) => {
-	testObj.unbelivebil = 66;
+applyFilters.addFilter('moreThenOneFilter',(resolve, testObj) => {
+	testObj.incredible = 1;
+	resolve(testObj);
+}, 2);
+
+applyFilters.addFilter('moreThenOneFilter',(resolve, testObj) => {
+	testObj.unbelievable = 66;
 	resolve(testObj);
 }, 1);
 
-applyFilters.addFilter('applyFiltersTest', 'addClassFilterResolved', (resolve, testObj) => {
+applyFilters.addFilter('applyFiltersTest', (resolve, testObj) => {
 	testObj.awesome = 33;
 	resolve(testObj);
 }, 2);
@@ -24,17 +29,6 @@ test('Test not used doFilter - emotyDoFilterTest', () => {
 	});
 });
 
-test('Test Filter with exiting hookName - addClassFilterResolved', () => {
-	let testObj = {
-		something: 1,
-		somethingElse: 1,
-	};
-
-	applyFilters.doFilter( 'applyFiltersTest', testObj ).then((testObj) => {
-		expect(testObj.awesome).toBe(33);
-	});
-});
-
 test('Test Filter with more then one filter', () => {
 	let testObj = {
 		something: 1,
@@ -43,7 +37,29 @@ test('Test Filter with more then one filter', () => {
 
 	applyFilters.doFilter( 'moreThenOneFilter', testObj ).then((testObj) => {
 		expect(testObj.awesome).toBe(44);
-		expect(testObj.unbelivebil).toBe(66);
+		expect(testObj.unbelievable).toBe(66);
+		expect(testObj.incredible).toBe(1);
+	});
+});
+
+test('Test Filter with same priority', () => {
+	let testObj = {
+		something: 1,
+		somethingElse: 1,
+	};
+
+	let toBeObj = [ 'something', 'somethingElse', 'unbelievable', 'awesome', 'incredible' ];
+
+	applyFilters.doFilter( 'moreThenOneFilter', testObj ).then((testObj) => {
+		let probs = Object.keys( testObj );
+
+		for ( let index = 0; index < probs.length; index++ ) {
+			for ( let i = 0; i < toBeObj.length; i++ ) {
+				if(index === i){
+					expect(probs[index]).toBe(toBeObj[i]);
+				}
+			}
+		}
 	});
 });
 
@@ -64,7 +80,7 @@ test('Test getFilter with filterName', () => {
 
 	let allFilter = applyFilters.getFilter('moreThenOneFilter');
 
-	expect(allFilter.length).toBe(3);
+	expect(allFilter.length).toBe(4);
 });
 
 test('Test helloStr', () => {
@@ -76,7 +92,7 @@ test('Test helloStr', () => {
 		});
 	};
 
-	applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, str) => {
+	applyFilters.addFilter('beforeSayHello', (resolve, str) => {
 		str = 'Rene';
 		resolve(str);
 	}, 1);

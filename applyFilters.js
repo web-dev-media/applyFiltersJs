@@ -9,17 +9,12 @@ module.exports = {
          *
          * @param {string} filterName
          * @param {string} hookName
-         * @param {function} callback
          * @param {number} priority
          *
          * @return void
          */
-        addFilter: function(filterName, hookName, callback, priority = 0) {
+        addFilter: function(filterName, callback, priority = 0) {
             if ( 'string' !== typeof filterName || '' === filterName ) {
-                return false;
-            }
-
-            if ( 'string' !== typeof hookName || '' === hookName ) {
                 return false;
             }
 
@@ -39,7 +34,7 @@ module.exports = {
             }
 
             this.filter[filterName][priority] = [];
-            this.filter[filterName][priority][hookName] = callback;
+            this.filter[filterName][priority] = callback;
         },
 
         /**
@@ -85,27 +80,22 @@ module.exports = {
             let solvedFilter = [];
             let priorities = Object.keys( callbackFunctions );
 
-            for (let index = 0; index < priorities.length; index++) {
-                let priority = priorities[ index ];
+            for ( let index = 0; index < priorities.length; index++ ) {
+                let priority = parseInt(priorities[ index ]);
 
-                let Keys = Object.keys( callbackFunctions[priority] );
-
-                for ( let i = 0; i < Keys.length; i++ ) {
-                    let callbackFunction = Keys[ i ];
-
-                    if ( callbackFunctions[ priority ][ callbackFunction ] !== undefined ) {
-                        solvedFilter.push( new Promise( ( resolve, reject ) => {
-                                let filter = callbackFunctions[ priority ][ callbackFunction ];
-                                filter( resolve, filterObj, args );
-                            } )
-                        );
-                    } else {
-                        solvedFilter.push( new Promise( ( resolve, reject ) => {
-                                resolve( filterObj, args );
-                            } )
-                        );
-                    }
+                if ( callbackFunctions[ priority ] !== undefined ) {
+                    solvedFilter.push( new Promise( ( resolve, reject ) => {
+                            let filter = callbackFunctions[ priority ];
+                            filter( resolve, filterObj, args );
+                        } )
+                    );
+                } else {
+                    solvedFilter.push( new Promise( ( resolve, reject ) => {
+                            resolve( filterObj, args );
+                        } )
+                    );
                 }
+
             }
 
             return solvedFilter;
