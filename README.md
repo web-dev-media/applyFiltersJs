@@ -67,6 +67,11 @@ applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, helloStr) => {
 	helloStr = 'Rene';
 	resolve(helloStr);
 }, 1);
+```
 
-sayHello();
+Run the example on DOMContentLoaded
+```
+document.addEventListener("DOMContentLoaded", function(event) {
+	sayHello();
+});
 ```
