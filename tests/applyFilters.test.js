@@ -1,101 +1,107 @@
 const applyFilters = require('../applyFilters').applyFilters;
 
 
-applyFilters.addFilter('moreThenOneFilter',(resolve, testObj) => {
-	testObj.awesome = 44;
-	resolve(testObj);
+applyFilters.addFilter('moreThenOneFilter', (resolve, testObj) => {
+  testObj.awesome = 44;
+  resolve(testObj);
 }, 2);
 
-applyFilters.addFilter('moreThenOneFilter',(resolve, testObj) => {
-	testObj.incredible = 1;
-	resolve(testObj);
+applyFilters.addFilter('moreThenOneFilter', (resolve, testObj) => {
+  testObj.incredible = 1;
+  resolve(testObj);
 }, 2);
 
-applyFilters.addFilter('moreThenOneFilter',(resolve, testObj) => {
-	testObj.unbelievable = 66;
-	resolve(testObj);
+applyFilters.addFilter('moreThenOneFilter', (resolve, testObj) => {
+  testObj.unbelievable = 66;
+  resolve(testObj);
 }, 1);
 
 applyFilters.addFilter('applyFiltersTest', (resolve, testObj) => {
-	testObj.awesome = 33;
-	resolve(testObj);
+  testObj.awesome = 33;
+  resolve(testObj);
 }, 2);
 
 test('Test not used doFilter - emotyDoFilterTest', () => {
-	let testObj = 42;
+  const testObj = 42;
 
-	applyFilters.doFilter( 'emotyDoFilterTest', testObj ).then((testObj) => {
-		expect(testObj).toBe(42);
-	});
+  applyFilters.doFilter( 'emotyDoFilterTest', testObj ).then((testObj) => {
+    expect(testObj).toBe(42);
+  });
 });
 
 test('Test Filter with more then one filter', () => {
-	let testObj = {
-		something: 1,
-		somethingElse: 1,
-	};
+  const testObj = {
+    something: 1,
+    somethingElse: 1,
+  };
 
-	applyFilters.doFilter( 'moreThenOneFilter', testObj ).then((testObj) => {
-		expect(testObj.awesome).toBe(44);
-		expect(testObj.unbelievable).toBe(66);
-		expect(testObj.incredible).toBe(1);
-	});
+  applyFilters.doFilter( 'moreThenOneFilter', testObj ).then((testObj) => {
+    expect(testObj.awesome).toBe(44);
+    expect(testObj.unbelievable).toBe(66);
+    expect(testObj.incredible).toBe(1);
+  });
 });
 
 test('Test Filter with same priority', () => {
-	let testObj = {
-		something: 1,
-		somethingElse: 1,
-	};
+  const testObj = {
+    something: 1,
+    somethingElse: 1,
+  };
 
-	let toBeObj = [ 'something', 'somethingElse', 'unbelievable', 'awesome', 'incredible' ];
+  const toBeObj = [
+    'something',
+    'somethingElse',
+    'unbelievable',
+    'awesome',
+    'incredible',
+  ];
 
-	applyFilters.doFilter( 'moreThenOneFilter', testObj ).then((testObj) => {
-		let probs = Object.keys( testObj );
+  applyFilters.doFilter( 'moreThenOneFilter', testObj ).then((testObj) => {
+    const probs = Object.keys( testObj );
 
-		for ( let index = 0; index < probs.length; index++ ) {
-			for ( let i = 0; i < toBeObj.length; i++ ) {
-				if(index === i){
-					expect(probs[index]).toBe(toBeObj[i]);
-				}
-			}
-		}
-	});
+    for ( let index = 0; index < probs.length; index++ ) {
+      for ( let i = 0; i < toBeObj.length; i++ ) {
+        if (index === i) {
+          expect(probs[index]).toBe(toBeObj[i]);
+        }
+      }
+    }
+  });
 });
 
 test('Test getFilter all', () => {
-	applyFilters.doFilter( 'moreThenOneFilter', {} ).then((testObj) => {});
+  applyFilters.doFilter( 'moreThenOneFilter', {} ).then((testObj) => {});
 
-	let allFilter = applyFilters.getFilter();
+  const allFilter = applyFilters.getFilter();
 
-	expect(typeof allFilter.applyFiltersTest).toBe('object');
-	expect(typeof allFilter.moreThenOneFilter).toBe('object');
+  expect(typeof allFilter.applyFiltersTest).toBe('object');
+  expect(typeof allFilter.moreThenOneFilter).toBe('object');
 });
 
 /*
  + Test getFilter with specific filtername
  */
 test('Test getFilter with filterName', () => {
-	applyFilters.doFilter( 'moreThenOneFilter', {} ).then((testObj) => {});
+  applyFilters.doFilter( 'moreThenOneFilter', {} ).then((testObj) => {});
 
-	let allFilter = applyFilters.getFilter('moreThenOneFilter');
+  const allFilter = applyFilters.getFilter('moreThenOneFilter');
 
-	expect(allFilter.length).toBe(4);
+  expect(allFilter.length).toBe(4);
 });
 
 test('Test helloStr', () => {
-	let sayHello = () => {
-		let helloStr = 'John';
+  const sayHello = () => {
+    const helloStr = 'John';
 
-		applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
-			expect(helloStr).toBe('Rene');
-		});
-	};
+    applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
+      expect(helloStr).toBe('Rene');
+    });
+  };
 
-	applyFilters.addFilter('beforeSayHello', (resolve, str) => {
-		str = 'Rene';
-		resolve(str);
-	}, 1);
+  applyFilters.addFilter('beforeSayHello', (resolve, str) => {
+    str = 'Rene';
+    resolve(str);
+  }, 1);
 
-	sayHello();
+  sayHello();
 });

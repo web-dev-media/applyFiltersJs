@@ -104,17 +104,12 @@ module.exports = {
          *
          * @param {string} filterName
          * @param {string} hookName
-         * @param {function} callback
          * @param {number} priority
          *
          * @return void
          */
-        addFilter: function(filterName, hookName, callback, priority = 0) {
+        addFilter: function(filterName, callback, priority = 0) {
             if ( 'string' !== typeof filterName || '' === filterName ) {
-                return false;
-            }
-
-            if ( 'string' !== typeof hookName || '' === hookName ) {
                 return false;
             }
 
@@ -134,7 +129,7 @@ module.exports = {
             }
 
             this.filter[filterName][priority] = [];
-            this.filter[filterName][priority][hookName] = callback;
+            this.filter[filterName][priority] = callback;
         },
 
         /**
@@ -180,27 +175,22 @@ module.exports = {
             let solvedFilter = [];
             let priorities = Object.keys( callbackFunctions );
 
-            for (let index = 0; index < priorities.length; index++) {
-                let priority = priorities[ index ];
+            for ( let index = 0; index < priorities.length; index++ ) {
+                let priority = parseInt(priorities[ index ]);
 
-                let Keys = Object.keys( callbackFunctions[priority] );
-
-                for ( let i = 0; i < Keys.length; i++ ) {
-                    let callbackFunction = Keys[ i ];
-
-                    if ( callbackFunctions[ priority ][ callbackFunction ] !== undefined ) {
-                        solvedFilter.push( new Promise( ( resolve, reject ) => {
-                                let filter = callbackFunctions[ priority ][ callbackFunction ];
-                                filter( resolve, filterObj, args );
-                            } )
-                        );
-                    } else {
-                        solvedFilter.push( new Promise( ( resolve, reject ) => {
-                                resolve( filterObj, args );
-                            } )
-                        );
-                    }
+                if ( callbackFunctions[ priority ] !== undefined ) {
+                    solvedFilter.push( new Promise( ( resolve, reject ) => {
+                            let filter = callbackFunctions[ priority ];
+                            filter( resolve, filterObj, args );
+                        } )
+                    );
+                } else {
+                    solvedFilter.push( new Promise( ( resolve, reject ) => {
+                            resolve( filterObj, args );
+                        } )
+                    );
                 }
+
             }
 
             return solvedFilter;
@@ -234,46 +224,46 @@ module.exports = {
 // include applyFilters
 const applyFilters = __webpack_require__(/*! applyFilters */ "./node_modules/applyFilters/applyFilters.js").applyFilters;
 
-// build a simple function
-let sayHello = () => {
-	let helloStr = 'John';
-	let span = document.querySelector('h2 span');
+/** build a simple function **/
+const sayHello = () => {
+  const helloStr = 'John';
+  const span = document.querySelector('h2 span');
 
-	/*
-	 * Place the doFilter() function this will handle
-	 * the registred filter functions
-	 *
-	 * @param {string} filterName
-	 * @param filterObj
-	 * @param args
-	 *
-	 * @return promise
-	 */
-	applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
-		span.innerHTML = helloStr;
-	});
+  /**
+   * Place the doFilter() function this will handle
+   * the registred filter functions
+   *
+   * @param {string} filterName
+   * @param filterObj
+   * @param args
+   *
+   * @return promise
+   **/
+  applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
+    span.innerHTML = helloStr;
+  });
 };
 
-/* 
+/**
  * Register a custom filter on 'beforeSayHello' and change the response.
- * 
- * Attention: the callback function in addFilter() 
+ *
+ * Attention: the callback function in addFilter()
  * runs in a Promise so you have to resolve this!
- * 
+ *
  * @param {string} filterName
  * @param {function} callback
  * @param {number} priority
- * 
- * @return void 
- */
+ *
+ * @return void
+ **/
 applyFilters.addFilter('beforeSayHello', (resolve, str) => {
-	str = str + ' and Rene';
-	resolve(str);
+  str = str + ' and Rene';
+  resolve(str);
 }, 1);
 
-// run codeexample on document loaded
-document.addEventListener("DOMContentLoaded", function(event) {
-	sayHello();
+/* run codeexample on document loaded */
+document.addEventListener('DOMContentLoaded', function(event) {
+  sayHello();
 });
 
 
