@@ -2,7 +2,8 @@
 
 > a simple lightweight javascript module to implement hooks in your project.
 
-Implemnt promise callback hooks in your projects.
+Execute functions hooked on a specific filter hook, specifying arguments.
+
 ## Install
 
 Using npm:
