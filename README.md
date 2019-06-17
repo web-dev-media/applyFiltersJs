@@ -52,26 +52,30 @@ applyFilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
 ```js
 const applyFilters = require('applyFilters').applyFilters;
 
-let sayHello = () => {
-	let helloStr = '';
+const sayHello = () => {
+  const helloStr = 'John';
 
-	applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
-		alert(helloStr);
-	});
+  applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
+    console.log(helloStr);
+  });
 };
 ```
 filter the helloStr from other place like a new file
 
 ```js
-applyFilters.addFilter('beforeSayHello', 'addMyName', (resolve, helloStr) => {
-	helloStr = 'Rene';
-	resolve(helloStr);
+applyFilters.addFilter('beforeSayHello', (resolve, str) => {
+  str = str + ' and Rene';
+  resolve(str);
 }, 1);
 ```
 
 Run the example on DOMContentLoaded
 ```
-document.addEventListener("DOMContentLoaded", function(event) {
-	sayHello();
+document.addEventListener('DOMContentLoaded', function(event) {
+  sayHello();
 });
+```
+The finally result logged to the console
+```
+John and Rene
 ```
