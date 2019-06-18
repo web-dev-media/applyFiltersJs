@@ -1,8 +1,7 @@
 # applyfilters a JavaScript hook module
+**a simple lightweight javascript module to implement hooks in your project.**
 
-> a simple lightweight javascript module to implement hooks in your project.
-
-Execute functions hooked on a specific filter hook, specifying arguments.
+Execute functions hooked on a specific filter hook, specifying arguments like you know it from WordPress in your JavaScript project.
 
 ## Install
 
@@ -81,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 });
 ```
 **filter the helloStr from other place like a new file**
-> example/src/filter.js
 [example/src/filter.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/filter.js)
 ```js
 module.exports = () => {
