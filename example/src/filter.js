@@ -1,5 +1,5 @@
 module.exports = () => {
-  const applyFilters = require('../../applyFilters').applyFilters;
+  const applyFilters = require('applyFilters').applyFilters;
   
   /**
    * Register a custom filter on 'beforeSayHello' and change the response.
