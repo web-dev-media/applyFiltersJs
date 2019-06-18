@@ -4,7 +4,7 @@
   "description": "a simple lightweight javascript module to implement hooks in your project.",
   "main": "applyFilters.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest && eslint --ext ./*.js tests/*.js example/src/*.js"
   },
   "repository": {
     "type": "git",
@@ -16,9 +16,26 @@
     "filters",
     "function",
     "callback",
-    "promise"
+    "promise",
+    "wordpress"
   ],
-  "author": "Web Dev Media UG",
+  "author":{
+    "name": "Web Dev Media UG",
+    "email": "info@web-dev-media.de",
+    "url": "https://web-dev-media.de"
+  },
+  "contributors": [
+    {
+      "name": "René Reimann",
+      "email": "info@rene-reimann.de",
+      "url": "http://www.rene-reimann.de"
+    },
+    {
+      "name": "Sven Balzer",
+      "email": "s.balzer@web-dev-media.de",
+      "url": "\"https://web-dev-media.de"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/web-dev-media/applyFiltersJs/issues"
