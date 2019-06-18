@@ -1,6 +1,6 @@
 {
   "name": "applyfilters",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "a simple lightweight javascript module to implement hooks in your project.",
   "main": "applyFilters.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "promise",
     "wordpress"
   ],
-  "author":{
+  "author": {
     "name": "Web Dev Media UG",
     "email": "info@web-dev-media.de",
     "url": "https://web-dev-media.de"
