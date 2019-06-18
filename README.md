@@ -49,7 +49,8 @@ applyFilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
 ```
 
 ## Example
-example/src/index.js
+[example/src/index.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/index.js)
+
 ```js
 const applyFilters = require('applyFilters').applyFilters;
 const filter = require('./filter')();
@@ -81,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 ```
 **filter the helloStr from other place like a new file**
 > example/src/filter.js
+[example/src/filter.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/filter.js)
 ```js
 module.exports = () => {
   const applyFilters = require('../../applyFilters').applyFilters;
