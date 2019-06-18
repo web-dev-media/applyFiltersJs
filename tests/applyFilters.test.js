@@ -1,5 +1,12 @@
 const applyFilters = require('../applyFilters').applyFilters;
 
+const spyError = jest.spyOn( console, 'error' );
+const spyWarn = jest.spyOn( console, 'warn' );
+
+beforeEach( () => {
+  spyError.mockReset();
+  spyWarn.mockReset();
+} );
 
 applyFilters.addFilter('moreThenOneFilter', (resolve, testObj) => {
   testObj.awesome = 44;
@@ -104,4 +111,18 @@ test('Test helloStr', () => {
   }, 1);
 
   sayHello();
+});
+
+test('Test addFilter without - filterName - log warn', () => {
+  applyFilters.doFilter( 'emptyFilterName', '' ).then((testObj) => {
+    expect( spyWarn ).toHaveBeenCalled();
+  });
+
+  applyFilters.addFilter('', (resolve, str) => {});
+});
+
+test('Test doFilter without - filterName log error', () => {
+  applyFilters.doFilter( '', '' ).then((testObj) => {
+    expect( spyError ).toHaveBeenCalled();
+  });
 });

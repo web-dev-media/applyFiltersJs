@@ -13,27 +13,32 @@ module.exports = {
      * @return {void}
      */
     addFilter: function(filterName, callback, priority = 0) {
-      if ('string' !== typeof filterName || '' === filterName) {
-        return false;
-      }
+      try {
+        if ('string' !== typeof filterName || '' === filterName) {
+          throw "unexpected usage of addFilter - filterName is undefined";
+        }
 
-      if (this.filter[filterName] === undefined) {
-        this.filter[filterName] = [];
-      }
+        if (this.filter[filterName] === undefined) {
+          this.filter[filterName] = [];
+        }
 
-      if (!priority && typeof priority !== 'number') {
-        priority = this.filter[filterName].length;
-        if (priority === 0) {
+        if (!priority && typeof priority !== 'number') {
+          priority = this.filter[filterName].length;
+          if (priority === 0) {
+            priority++;
+          }
+        }
+
+        if (this.filter[filterName][priority] !== undefined) {
           priority++;
         }
-      }
 
-      if (this.filter[filterName][priority] !== undefined) {
-        priority++;
-      }
+        this.filter[filterName][priority] = [];
+        this.filter[filterName][priority] = callback;
 
-      this.filter[filterName][priority] = [];
-      this.filter[filterName][priority] = callback;
+      } catch (e) {
+        console.warn(e);
+      }
     },
 
     /**
@@ -47,24 +52,32 @@ module.exports = {
     doFilter: async function(filterName, filterObj, args = null) {
       const self = this;
 
-      if ('string' !== typeof filterName || '' === filterName) {
-        return 'filterName is empty';
-      }
+      try {
+        if ('string' !== typeof filterName || '' === filterName) {
+          throw 'unexpected usage of doFilter - filterName is undefined';
+        }
 
-      const filter = this.filter[filterName] !== undefined ?
-          this.filter[filterName] :
-          null;
+        if ('string' !== typeof filterName || '' === filterName) {
+          return 'filterName is empty';
+        }
 
-      if (filter) {
-        const solvedFilter = self.asyncForEach(filter, filterObj, args);
+        const filter = this.filter[filterName] !== undefined ?
+            this.filter[filterName] :
+            null;
 
-        return Promise.all(solvedFilter).then((values) => {
-          return values[values.length - 1];
-        }, (reason) => {
-          console.log(reason);
-        });
-      } else {
-        return filterObj;
+        if (filter) {
+          const solvedFilter = self.asyncForEach(filter, filterObj, args);
+
+          return Promise.all(solvedFilter).then((values) => {
+            return values[values.length - 1];
+          }, (reason) => {
+            console.log(reason);
+          });
+        } else {
+          return filterObj;
+        }
+      } catch (e) {
+        console.error(e);
       }
     },
 
@@ -106,11 +119,7 @@ module.exports = {
      * @return {array}
      */
     getFilter: function(filterName = '') {
-      if (this.filter[filterName] !== undefined) {
-        return this.filter[filterName];
-      } else {
-        return this.filter;
-      }
+      return this.filter[filterName] !== undefined ? this.filter[filterName] : this.filter;
     },
   },
 };

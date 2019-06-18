@@ -4,7 +4,7 @@
   "description": "a simple lightweight javascript module to implement hooks in your project.",
   "main": "applyFilters.js",
   "scripts": {
-    "test": "jest && eslint --ext ./*.js tests/*.js example/src/*.js"
+    "test": "jest && eslint --ext ./*.js tests/*.js example/src/*.js --fix"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     {
       "name": "Sven Balzer",
       "email": "s.balzer@web-dev-media.de",
-      "url": "\"https://web-dev-media.de"
+      "url": "https://web-dev-media.de"
     }
   ],
   "license": "MIT",
