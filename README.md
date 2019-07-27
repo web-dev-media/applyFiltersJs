@@ -4,16 +4,17 @@
 Execute functions hooked on a specific filter hook, specifying arguments like you know it from WordPress in your JavaScript project.
 
 ## Install
-
-Using npm:
-
 ```sh
 npm install --save applyfilters
 ```
 
 ## Usage
-Place a dofilter event
+#### require
+```js
+const applyfilters = require("applyfilters");
+```
 
+#### add a dofilter event
 ```js
 /*
  * Place the doFilter() function this will handle
@@ -28,7 +29,7 @@ Place a dofilter event
 applyFilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
 ```
 
-Add a filter function
+#### a filter function
 ```js
 /* 
  * Register a custom filter on 'beforeSayHello' and change the response.
@@ -47,12 +48,32 @@ applyFilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
 }, 1);
 ```
 
+## RunKit Example
+```js
+const applyfilters = require("applyfilters");
+
+// Usage see -> a filter function
+applyfilters.addFilter('runKit_test', (resolve, filteredResult) => {
+    filteredResult.runkit = 1;
+    resolve(filteredResult);
+}, 1);
+
+// simple object
+var runKitObj = {foo: "bar"}
+
+// Usage see -> add a dofilter event
+applyfilters.doFilter( 'runKit_test', runKitObj ).then((filteredResult) => {
+    console.log(filteredResult);
+});
+```
+
+
 ## Example
 [example/src/index.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/index.js)
 
 ```js
-const applyFilters = require('applyFilters').applyFilters;
-const filter = require('./filter')();
+const applyFilters = require('applyFilters');
+require('./filter')();
 
 /** build a simple function **/
 const sayHello = () => {
@@ -83,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 [example/src/filter.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/filter.js)
 ```js
 module.exports = () => {
-  const applyFilters = require('../../applyFilters').applyFilters;
+  const applyFilters = require('applyFilters');
   
   /**
    * Register a custom filter on 'beforeSayHello' and change the response.
@@ -99,7 +120,7 @@ module.exports = () => {
    **/
   applyFilters.addFilter('beforeSayHello', (resolve, str) => {
     str = str + ' and Rene';
-  resolve(str);
+    resolve(str);
   }, 1);
 }
 ```
@@ -108,3 +129,17 @@ The finally result in browser
 ```
 applyFilters example - say hello to John and Rene
 ```
+---
+
+# What is in the inside?
+| Name  | Type  | Description |
+|---|---|---|
+| [filter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#3) | array | contains all registered filter |
+| [addFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#14)  | function  | registers a function that use a filter/hook 'doFilter()' |
+| [doFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#50)  | function | register a filter/hook for this can add a filter 'addFilter()' |
+| [asyncForEach](https://github.com/web-dev-media/applyFiltersJs/blob/master/#91) | function | Iterate the registered filter from this.filter |
+| [getFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#119)  | function | returns all registered filter |
+
+---
+#### contact
+info@web-dev-media.de

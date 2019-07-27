@@ -1,6 +1,6 @@
 module.exports = () => {
-  const applyFilters = require('applyFilters').applyFilters;
-  
+  const applyFilters = require('applyFilters');
+
   /**
    * Register a custom filter on 'beforeSayHello' and change the response.
    *
@@ -15,6 +15,6 @@ module.exports = () => {
    **/
   applyFilters.addFilter('beforeSayHello', (resolve, str) => {
     str = str + ' and Rene';
-  resolve(str);
+    resolve(str);
   }, 1);
-}
+};

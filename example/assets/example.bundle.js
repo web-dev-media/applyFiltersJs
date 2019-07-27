@@ -86,139 +86,140 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "../applyFilters.js":
-/*!**************************!*\
-  !*** ../applyFilters.js ***!
-  \**************************/
+/***/ "./node_modules/applyFilters/applyFilters.js":
+/*!***************************************************!*\
+  !*** ./node_modules/applyFilters/applyFilters.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = {
-  applyFilters: {
-    // container for all registered filter
-    filter: [],
+const applyFilters = {
+  // container for all registered filter
+  filter: [],
 
-    /**
-     * registers a function  that use a filter/hook 'this.doFilter()'
-     * this function can modify the code excecution or data
-     *
-     * @param {string} filterName
-     * @param {string} callback
-     * @param {number} priority
-     * @return {void}
-     */
-    addFilter: function(filterName, callback, priority = 0) {
-      try {
-        if ('string' !== typeof filterName || '' === filterName) {
-          throw "unexpected usage of addFilter - filterName is undefined";
-        }
+  /**
+   * registers a function  that use a filter/hook 'this.doFilter()'
+   * this function can modify the code execution or data
+   *
+   * @param {string} filterName
+   * @param {string} callback
+   * @param {number} priority
+   * @return {void}
+   */
+  addFilter: function(filterName, callback, priority = 0) {
+    try {
+      if ('string' !== typeof filterName || '' === filterName) {
+        throw 'unexpected usage of addFilter - filterName is undefined';
+      }
 
-        if (this.filter[filterName] === undefined) {
-          this.filter[filterName] = [];
-        }
+      if (this.filter[filterName] === undefined) {
+        this.filter[filterName] = [];
+      }
 
-        if (!priority && typeof priority !== 'number') {
-          priority = this.filter[filterName].length;
-          if (priority === 0) {
-            priority++;
-          }
-        }
-
-        if (this.filter[filterName][priority] !== undefined) {
+      if (!priority && typeof priority !== 'number') {
+        priority = this.filter[filterName].length;
+        if (priority === 0) {
           priority++;
         }
-
-        this.filter[filterName][priority] = [];
-        this.filter[filterName][priority] = callback;
-
-      } catch (e) {
-        console.warn(e);
-      }
-    },
-
-    /**
-     * register a filter/hook so that consumer use to register a
-     * 'this.addFilter()' function to register a callback function
-     *
-     * @param {string} filterName
-     * @param {Object|string|number|array} filterObj
-     * @param {Object|string|number|array} args
-     */
-    doFilter: async function(filterName, filterObj, args = null) {
-      const self = this;
-
-      try {
-        if ('string' !== typeof filterName || '' === filterName) {
-          throw 'unexpected usage of doFilter - filterName is undefined';
-        }
-
-        if ('string' !== typeof filterName || '' === filterName) {
-          return 'filterName is empty';
-        }
-
-        const filter = this.filter[filterName] !== undefined ?
-            this.filter[filterName] :
-            null;
-
-        if (filter) {
-          const solvedFilter = self.asyncForEach(filter, filterObj, args);
-
-          return Promise.all(solvedFilter).then((values) => {
-            return values[values.length - 1];
-          }, (reason) => {
-            console.log(reason);
-          });
-        } else {
-          return filterObj;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-
-    /**
-     * Run over the registered callbackFunctions
-     *
-     * @param {function} callbackFunctions
-     * @param {Object|string|number|array} filterObj
-     * @param {Object|string|number|array} args
-     *
-     * @return {promise|array}
-     */
-    asyncForEach: function(callbackFunctions, filterObj, args = null) {
-      const solvedFilter = [];
-      const priorities = Object.keys(callbackFunctions);
-
-      for (let index = 0; index < priorities.length; index++) {
-        const priority = parseInt(priorities[index]);
-
-        if (callbackFunctions[priority] !== undefined) {
-          solvedFilter.push(new Promise((resolve, reject) => {
-            const filter = callbackFunctions[priority];
-            filter(resolve, filterObj, args);
-          }));
-        } else {
-          solvedFilter.push(new Promise((resolve, reject) => {
-            resolve(filterObj, args);
-          }));
-        }
       }
 
-      return solvedFilter;
-    },
+      if (this.filter[filterName][priority] !== undefined) {
+        priority++;
+      }
 
-    /**
-     * returns all registered filter
-     *
-     * @param {string} filterName
-     * @return {array}
-     */
-    getFilter: function(filterName = '') {
-      return this.filter[filterName] !== undefined ? this.filter[filterName] : this.filter;
-    },
+      this.filter[filterName][priority] = [];
+      this.filter[filterName][priority] = callback;
+    } catch (e) {
+      console.warn(e);
+    }
   },
+
+  /**
+   * register a filter/hook so that consumer use to register a
+   * 'this.addFilter()' function to register a callback function
+   *
+   * @param {string} filterName
+   * @param {Object|string|number|array} filterObj
+   * @param {Object|string|number|array} args
+   */
+  doFilter: async function(filterName, filterObj, args = null) {
+    const self = this;
+
+    try {
+      if ('string' !== typeof filterName || '' === filterName) {
+        throw 'unexpected usage of doFilter - filterName is undefined';
+      }
+
+      if ('string' !== typeof filterName || '' === filterName) {
+        return 'filterName is empty';
+      }
+
+      const filter = this.filter[filterName] !== undefined ?
+          this.filter[filterName] :
+          null;
+
+      if (filter) {
+        const solvedFilter = self.asyncForEach(filter, filterObj, args);
+
+        return Promise.all(solvedFilter).then((values) => {
+          return values[values.length - 1];
+        }, (reason) => {
+          console.log(reason);
+        });
+      } else {
+        return filterObj;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  /**
+   * Run over the registered callbackFunctions
+   *
+   * @param {function} callbackFunctions
+   * @param {Object|string|number|array} filterObj
+   * @param {Object|string|number|array} args
+   *
+   * @return {promise|array}
+   */
+  asyncForEach: function(callbackFunctions, filterObj, args = null) {
+    const solvedFilter = [];
+    const priorities = Object.keys(callbackFunctions);
+
+    for (let index = 0; index < priorities.length; index++) {
+      const priority = parseInt(priorities[index]);
+
+      if (callbackFunctions[priority] !== undefined) {
+        solvedFilter.push(new Promise((resolve, reject) => {
+          const filter = callbackFunctions[priority];
+          filter(resolve, filterObj, args);
+        }));
+      } else {
+        solvedFilter.push(new Promise((resolve, reject) => {
+          resolve(filterObj, args);
+        }));
+      }
+    }
+
+    return solvedFilter;
+  },
+
+  /**
+   * returns all registered filter
+   *
+   * @param {string} filterName
+   * @return {array}
+   */
+  getFilter: function(filterName = '') {
+    return this.filter[filterName] !== undefined ?
+        this.filter[filterName] :
+        this.filter;
+  },
+
 };
 
+module.exports = applyFilters;
 
 /***/ }),
 
@@ -230,8 +231,8 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = () => {
-  const applyFilters = __webpack_require__(/*! ../../applyFilters */ "../applyFilters.js").applyFilters;
-  
+  const applyFilters = __webpack_require__(/*! applyFilters */ "./node_modules/applyFilters/applyFilters.js");
+
   /**
    * Register a custom filter on 'beforeSayHello' and change the response.
    *
@@ -246,9 +247,10 @@ module.exports = () => {
    **/
   applyFilters.addFilter('beforeSayHello', (resolve, str) => {
     str = str + ' and Rene';
-  resolve(str);
+    resolve(str);
   }, 1);
-}
+};
+
 
 /***/ }),
 
@@ -259,8 +261,8 @@ module.exports = () => {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-const applyFilters = __webpack_require__(/*! ../../applyFilters */ "../applyFilters.js").applyFilters;
-const filter = __webpack_require__(/*! ./filter */ "./src/filter.js")();
+const applyFilters = __webpack_require__(/*! applyFilters */ "./node_modules/applyFilters/applyFilters.js");
+__webpack_require__(/*! ./filter */ "./src/filter.js")();
 
 /** build a simple function **/
 const sayHello = () => {
@@ -277,15 +279,16 @@ const sayHello = () => {
    *
    * @return promise
    **/
-  applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
+  applyFilters.doFilter('beforeSayHello', helloStr).then((helloStr) => {
     span.innerHTML = helloStr;
-});
+  });
 };
 
 /* run codeexample on document loaded */
 document.addEventListener('DOMContentLoaded', function(event) {
   sayHello();
 });
+
 
 /***/ }),
 

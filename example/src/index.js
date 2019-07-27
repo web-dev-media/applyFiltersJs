@@ -1,5 +1,5 @@
-const applyFilters = require('applyFilters').applyFilters;
-const filter = require('./filter')();
+const applyFilters = require('applyFilters');
+require('./filter')();
 
 /** build a simple function **/
 const sayHello = () => {
@@ -16,9 +16,9 @@ const sayHello = () => {
    *
    * @return promise
    **/
-  applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
+  applyFilters.doFilter('beforeSayHello', helloStr).then((helloStr) => {
     span.innerHTML = helloStr;
-});
+  });
 };
 
 /* run codeexample on document loaded */

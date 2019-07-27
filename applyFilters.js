@@ -40,7 +40,7 @@ const applyFilters = {
   },
 
   /**
-   * register a filter/hook so that consumer use to register a
+   * register a filter/hook for this can add a filter
    * 'this.addFilter()' function to register a callback function
    *
    * @param {string} filterName
@@ -80,7 +80,7 @@ const applyFilters = {
   },
 
   /**
-   * Run over the registered callbackFunctions
+   * Iterate the registered filter from this.filter
    *
    * @param {function} callbackFunctions
    * @param {Object|string|number|array} filterObj
