@@ -1,7 +1,6 @@
-[![NPM version][npm-image]][npm-url]
+[![npm version](https://badge.fury.io/js/applyfilters.svg)](https://badge.fury.io/js/applyfilters)
 [![Build Status](https://travis-ci.org/web-dev-media/applyFiltersJs.svg?branch=master)](https://travis-ci.org/web-dev-media/applyFiltersJs)
-[![Downloads][downloads-image]][downloads-url]
-
+![npm](https://img.shields.io/npm/dt/applyfilters)
 # applyfilters a JavaScript hook module
 **a simple lightweight javascript module to implement hooks in your project.**
 
