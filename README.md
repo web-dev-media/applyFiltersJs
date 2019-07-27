@@ -139,11 +139,11 @@ applyFilters example - say hello to John and Rene
 # What is in the inside?
 | Name  | Type  | Description |
 |---|---|---|
-| [filter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L3) | array | contains all registered filter |
-| [addFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L14-L40)  | function  | registers a function that use a filter/hook 'doFilter()' |
-| [doFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L50-L80)  | function | register a filter/hook for this can add a filter 'addFilter()' |
-| [asyncForEach](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L91-L108) | function | Iterate the registered filter from this.filter |
-| [getFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L119-L123)  | function | returns all registered filter |
+| [filter](https://github.com/web-dev-media/applyFiltersJs/blob/master/src/applyFilters.js#L3) | array | contains all registered filter |
+| [addFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/src/applyFilters.js#L14-L40)  | function  | registers a function that use a filter/hook 'doFilter()' |
+| [doFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/src/applyFilters.js#L50-L80)  | function | register a filter/hook for this can add a filter 'addFilter()' |
+| [asyncForEach](https://github.com/web-dev-media/applyFiltersJs/blob/master/src/applyFilters.js#L91-L108) | function | Iterate the registered filter from this.filter |
+| [getFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/src/applyFilters.js#L119-L123)  | function | returns all registered filter |
 
 #### contact
 * info@web-dev-media.de
