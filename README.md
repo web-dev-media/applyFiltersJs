@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/web-dev-media/applyFiltersJs.svg?branch=master)](https://travis-ci.org/web-dev-media/applyFiltersJs)
+
 # applyfilters a JavaScript hook module
 **a simple lightweight javascript module to implement hooks in your project.**
 
