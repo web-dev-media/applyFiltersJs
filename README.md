@@ -97,7 +97,8 @@ const sayHello = () => {
   });
 };
 
-/https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js {
+/* run codeexample on document loaded */
+document.addEventListener('DOMContentLoaded', function(event) {
   sayHello();
 });
 ```
