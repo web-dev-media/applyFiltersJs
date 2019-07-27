@@ -3,7 +3,7 @@ require('./filter')();
 
 /** build a simple function **/
 const sayHello = () => {
-  const helloStr = 'John';
+  const helloStr = 'Sven';
   const span = document.querySelector('h2 span');
 
   /**

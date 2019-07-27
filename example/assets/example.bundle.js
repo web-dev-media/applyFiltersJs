@@ -266,7 +266,7 @@ __webpack_require__(/*! ./filter */ "./src/filter.js")();
 
 /** build a simple function **/
 const sayHello = () => {
-  const helloStr = 'John';
+  const helloStr = 'Sven';
   const span = document.querySelector('h2 span');
 
   /**
