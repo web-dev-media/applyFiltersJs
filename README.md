@@ -84,7 +84,7 @@ const sayHello = () => {
 
   /**
    * Place the doFilter() function this will handle
-   * the registred filter functions
+   * the registered filter functions
    *
    * @param {string} filterName
    * @param filterObj
@@ -97,8 +97,7 @@ const sayHello = () => {
   });
 };
 
-/* run codeexample on document loaded */
-document.addEventListener('DOMContentLoaded', function(event) {
+/https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js {
   sayHello();
 });
 ```
@@ -131,17 +130,16 @@ The finally result in browser
 ```
 applyFilters example - say hello to John and Rene
 ```
----
 
 # What is in the inside?
 | Name  | Type  | Description |
 |---|---|---|
-| [filter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#3) | array | contains all registered filter |
-| [addFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#14)  | function  | registers a function that use a filter/hook 'doFilter()' |
-| [doFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#50)  | function | register a filter/hook for this can add a filter 'addFilter()' |
-| [asyncForEach](https://github.com/web-dev-media/applyFiltersJs/blob/master/#91) | function | Iterate the registered filter from this.filter |
-| [getFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/#119)  | function | returns all registered filter |
+| [filter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L3) | array | contains all registered filter |
+| [addFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L14-L40)  | function  | registers a function that use a filter/hook 'doFilter()' |
+| [doFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L50-L80)  | function | register a filter/hook for this can add a filter 'addFilter()' |
+| [asyncForEach](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L91-L108) | function | Iterate the registered filter from this.filter |
+| [getFilter](https://github.com/web-dev-media/applyFiltersJs/blob/master/applyFilters.js#L119-L123)  | function | returns all registered filter |
 
----
 #### contact
-info@web-dev-media.de
+* info@web-dev-media.de
+* https://web-dev-media.de

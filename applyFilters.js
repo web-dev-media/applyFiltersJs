@@ -40,8 +40,8 @@ const applyFilters = {
   },
 
   /**
-   * register a filter/hook for this can add a filter
-   * 'this.addFilter()' function to register a callback function
+   * Place the doFilter() function this will handle
+   * the registered filter functions
    *
    * @param {string} filterName
    * @param {Object|string|number|array} filterObj
