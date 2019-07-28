@@ -1,4 +1,4 @@
-const applyFilters = require('../applyFilters');
+const applyFilters = require('../applyFilters.js');
 
 const spyError = jest.spyOn( console, 'error' );
 const spyWarn = jest.spyOn( console, 'warn' );
