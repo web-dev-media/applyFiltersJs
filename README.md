@@ -38,7 +38,7 @@ applyfilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
 #### a filter function
 ```js
 /* 
- * Register a custom filter on 'beforeSayHello' and change the response.
+ * Register a custom filter before doFilter('beforeSayHello') and change the response.
  * 
  * Attention: the callback function in addFilter() 
  * runs in a Promise so you have to resolve this!
@@ -49,9 +49,11 @@ applyfilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
  * 
  * @return void 
  */
-applyfilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
+applyfilters.addFilter('beforeSayHello', (resolve, filteredResult) => {
     resolve(filteredResult);
 }, 1);
+
+applyfilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
 ```
 
 ## RunKit Example
