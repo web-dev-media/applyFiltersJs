@@ -32,7 +32,7 @@ const applyfilters = require("applyfilters");
  *
  * @return promise
   */
-applyFilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
+applyfilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
 ```
 
 #### a filter function
@@ -49,7 +49,7 @@ applyFilters.doFilter( 'beforeSayHello', {} ).then((filteredResult) => {});
  * 
  * @return void 
  */
-applyFilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
+applyfilters.addFilter('moreThenOneFilter', (resolve, filteredResult) => {
     resolve(filteredResult);
 }, 1);
 ```
@@ -78,7 +78,7 @@ applyfilters.doFilter( 'runKit_test', runKitObj ).then((filteredResult) => {
 [example/src/index.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/index.js)
 
 ```js
-const applyFilters = require('applyFilters');
+const applyfilters = require('applyFilters');
 require('./filter')();
 
 /** build a simple function **/
@@ -96,7 +96,7 @@ const sayHello = () => {
    *
    * @return promise
    **/
-  applyFilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
+  applyfilters.doFilter( 'beforeSayHello', helloStr ).then((helloStr) => {
     span.innerHTML = helloStr;
   });
 };
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 [example/src/filter.js](https://github.com/web-dev-media/applyFiltersJs/blob/master/example/src/filter.js)
 ```js
 module.exports = () => {
-  const applyFilters = require('applyFilters');
+  const applyfilters = require('applyFilters');
   
   /**
    * Register a custom filter on 'beforeSayHello' and change the response.
@@ -124,7 +124,7 @@ module.exports = () => {
    *
    * @return void
    **/
-  applyFilters.addFilter('beforeSayHello', (resolve, str) => {
+  applyfilters.addFilter('beforeSayHello', (resolve, str) => {
     str = str + ' and Rene';
     resolve(str);
   }, 1);
@@ -133,7 +133,7 @@ module.exports = () => {
 
 The finally result in browser
 ```
-applyFilters example - say hello to John and Rene
+applyfilters example - say hello to Sven and Rene
 ```
 
 # What is in the inside?
