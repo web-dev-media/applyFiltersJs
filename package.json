@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/web-dev-media/applyFiltersJs#readme",
   "devDependencies": {
-    "eslint": "^5.16.0",
+    "eslint": "6.2.2",
     "eslint-config-google": "^0.13.0",
     "jest": "^24.8.0",
     "minify": "^4.1.3"
