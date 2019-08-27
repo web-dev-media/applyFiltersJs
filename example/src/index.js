@@ -1,4 +1,4 @@
-const applyFilters = require('applyFilters');
+const applyFilters = require('../../applyFilters.js');
 require('./filter')();
 
 /** build a simple function **/
