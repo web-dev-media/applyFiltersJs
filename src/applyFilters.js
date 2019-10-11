@@ -51,10 +51,6 @@ const applyFilters = {
         throw 'unexpected usage of doFilter - filterName is undefined';
       }
 
-      if ('string' !== typeof filterName || '' === filterName) {
-        return 'filterName is empty';
-      }
-
       const filter = this.filter[filterName] !== undefined ?
           this.filter[filterName] :
           null;
