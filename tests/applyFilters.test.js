@@ -52,7 +52,7 @@ test('Test Filter with more then one filter', () => {
 test('Test Filter with same priority', () => {
   const testObj = {
     something: 1,
-    somethingElse: 1,
+    somethingElse: 1
   };
 
   const toBeObj = [

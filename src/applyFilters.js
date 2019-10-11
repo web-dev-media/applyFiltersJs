@@ -22,10 +22,7 @@ const applyFilters = {
       }
 
       if (!priority && typeof priority !== 'number') {
-        priority = this.filter[filterName].length;
-        if (priority === 0) {
-          priority++;
-        }
+        priority = this.filter[filterName].length === 0 ? 1 : this.filter[filterName].length;
       }
 
       if (this.filter[filterName][priority] !== undefined) {
