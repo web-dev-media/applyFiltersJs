@@ -29,7 +29,6 @@ const applyFilters = {
         priority++;
       }
 
-      this.filter[filterName][priority] = [];
       this.filter[filterName][priority] = callback;
     } catch (e) {
       console.warn(e);
