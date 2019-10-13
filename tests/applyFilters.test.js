@@ -53,6 +53,9 @@ test('Test Filter with same priority', () => {
   const testObj = {
     something: 1,
     somethingElse: 1,
+    unbelievable: 2,
+    awesome: 3,
+    incredible: 3,
   };
 
   const toBeObj = [

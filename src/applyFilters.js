@@ -22,17 +22,13 @@ const applyFilters = {
       }
 
       if (!priority && typeof priority !== 'number') {
-        priority = this.filter[filterName].length;
-        if (priority === 0) {
-          priority++;
-        }
+        priority = this.filter[filterName].length === 0 ? 1 : this.filter[filterName].length;
       }
 
       if (this.filter[filterName][priority] !== undefined) {
         priority++;
       }
 
-      this.filter[filterName][priority] = [];
       this.filter[filterName][priority] = callback;
     } catch (e) {
       console.warn(e);
@@ -53,10 +49,6 @@ const applyFilters = {
     try {
       if ('string' !== typeof filterName || '' === filterName) {
         throw 'unexpected usage of doFilter - filterName is undefined';
-      }
-
-      if ('string' !== typeof filterName || '' === filterName) {
-        return 'filterName is empty';
       }
 
       const filter = this.filter[filterName] !== undefined ?
