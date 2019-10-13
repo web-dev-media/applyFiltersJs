@@ -1,6 +1,6 @@
 {
   "name": "applyfilters",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "a simple lightweight javascript module to implement hooks in your project.",
   "main": "applyFilters.js",
   "scripts": {
