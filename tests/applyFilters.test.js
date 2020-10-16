@@ -1,11 +1,11 @@
 const applyFilters = require('../applyFilters.js');
 
-const spyError = jest.spyOn( console, 'error' );
-const spyWarn = jest.spyOn( console, 'warn' );
+const SPY_ERROR = jest.spyOn( console, 'error' );
+const SPY_WARN = jest.spyOn( console, 'warn' );
 
 beforeEach( () => {
-  spyError.mockReset();
-  spyWarn.mockReset();
+  SPY_ERROR.mockReset();
+  SPY_WARN.mockReset();
 } );
 
 applyFilters.addFilter('moreThenOneFilter', (resolve, testObj) => {
