@@ -1,4 +1,4 @@
-const path = require('path');
+const PATH = require('path');
 
 module.exports = {
   entry: {
@@ -9,9 +9,9 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: 'example.bundle.js',
-    path: path.resolve(__dirname, 'assets'),
+    path: PATH.resolve(__dirname, 'assets'),
   },
   optimization: {
     minimize: true,
-  },
+  }
 };
